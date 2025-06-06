@@ -6,7 +6,7 @@ import { EditModal } from "../components/EditModal";
 import { ConfirmationModal } from "../components/ConfirmationModal.tsx";
 import { Pencil, Trash } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Loading } from "../components/Loading"; // <-- Add this import
+import { Loading } from "../components/Loading";
 
 type Course = {
     id: number;
@@ -54,11 +54,11 @@ export const SubjectsView = () => {
     // Fetch subjects and expand course references
     const fetchSubject = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8000/api/subjects/");
+            const response = await axios.get("https://djsms.onrender.com/api/subjects/");
             const subjectsRaw: Subject[] = response.data;
 
             // Fetch all courses for mapping
-            const coursesRes = await axios.get("http://127.0.0.1:8000/api/courses/");
+            const coursesRes = await axios.get("https://djsms.onrender.com/api/courses/");
             const coursesMap = new Map<number, Course>();
             coursesRes.data.forEach((c: Course) => coursesMap.set(c.id, c));
 
@@ -92,7 +92,7 @@ export const SubjectsView = () => {
 
     const handleSubmit = () => {
         axios
-            .post("http://127.0.0.1:8000/api/subjects/", formData)
+            .post("https://djsms.onrender.com/api/subjects/", formData)
             .then(() => {
                 fetchSubject();
                 setIsAddModalOpen(false);
@@ -108,7 +108,7 @@ export const SubjectsView = () => {
     const handleEditSubmit = () => {
         if (!subjectToEdit) return;
         axios
-            .put(`http://127.0.0.1:8000/api/subjects/${subjectToEdit.id}/`, editFormData)
+            .put(`https://djsms.onrender.com/api/subjects/${subjectToEdit.id}/`, editFormData)
             .then(() => {
                 fetchSubject();
                 setIsEditModalOpen(false);
@@ -124,7 +124,7 @@ export const SubjectsView = () => {
     const handleConfirmDelete = () => {
         if (!subjectToDelete) return;
         axios
-            .delete(`http://127.0.0.1:8000/api/subjects/${subjectToDelete.id}/`)
+            .delete(`https://djsms.onrender.com/api/subjects/${subjectToDelete.id}/`)
             .then(() => {
                 fetchSubject();
                 setSubjectToDelete(null);

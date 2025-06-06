@@ -45,8 +45,8 @@ export const ExamsView = () => {
     const fetchData = async () => {
         setLoading(true);
         const [examRes, subjectRes] = await Promise.all([
-            fetch("http://127.0.0.1:8000/api/exams/"),
-            fetch("http://127.0.0.1:8000/api/subjects/"),
+            fetch("https://djsms.onrender.com/api/exams/"),
+            fetch("https://djsms.onrender.com/api/subjects/"),
         ]);
         const examsData = await examRes.json();
         const subjectsData = await subjectRes.json();
@@ -73,7 +73,7 @@ export const ExamsView = () => {
         if (form.title) payload.title = form.title;
         if (form.total_marks !== "") payload.total_marks = Number(form.total_marks);
 
-        const res = await fetch("http://127.0.0.1:8000/api/exams/", {
+        const res = await fetch("https://djsms.onrender.com/api/exams/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -110,7 +110,7 @@ export const ExamsView = () => {
         if (editForm.title) payload.title = editForm.title;
         if (editForm.total_marks !== "") payload.total_marks = Number(editForm.total_marks);
 
-        const res = await fetch(`http://127.0.0.1:8000/api/exams/${examToEdit.id}/`, {
+        const res = await fetch(`https://djsms.onrender.com/api/exams/${examToEdit.id}/`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -136,7 +136,7 @@ export const ExamsView = () => {
 
     const handleConfirmDelete = async () => {
         if (!examToDelete) return;
-        await fetch(`http://127.0.0.1:8000/api/exams/${examToDelete.id}/`, { method: "DELETE" });
+        await fetch(`https://djsms.onrender.com/api/exams/${examToDelete.id}/`, { method: "DELETE" });
         setExamToDelete(null);
         await fetchData();
     };

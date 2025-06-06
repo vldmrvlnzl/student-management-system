@@ -34,7 +34,7 @@ export const CoursesView = () => {
 
     const fetchCourses = () => {
         return axios
-            .get("http://127.0.0.1:8000/api/courses/")
+            .get("https://djsms.onrender.com/api/courses/")
             .then((response) => {
                 setCourses(Array.isArray(response.data) ? response.data : response.data.results ?? []);
             })
@@ -64,7 +64,7 @@ export const CoursesView = () => {
 
     const handleSubmit = () => {
         axios
-            .post("http://127.0.0.1:8000/api/courses/", formData)
+            .post("https://djsms.onrender.com/api/courses/", formData)
             .then(() => {
                 fetchCourses();
                 setIsModalOpen(false);
@@ -82,7 +82,7 @@ export const CoursesView = () => {
     const handleEditSubmit = () => {
         if (!editingCourse) return;
         axios
-            .put(`http://127.0.0.1:8000/api/courses/${editingCourse.id}/`, editFormData)
+            .put(`https://djsms.onrender.com/api/courses/${editingCourse.id}/`, editFormData)
             .then(() => {
                 fetchCourses();
                 setIsEditModalOpen(false);
@@ -98,7 +98,7 @@ export const CoursesView = () => {
     const handleConfirmDelete = () => {
         if (!courseToDelete) return;
         axios
-            .delete(`http://127.0.0.1:8000/api/courses/${courseToDelete.id}/`)
+            .delete(`https://djsms.onrender.com/api/courses/${courseToDelete.id}/`)
             .then(() => {
                 fetchCourses();
                 setCourseToDelete(null);

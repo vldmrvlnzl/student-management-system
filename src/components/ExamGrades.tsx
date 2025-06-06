@@ -92,7 +92,7 @@ export const ExamGrades: React.FC<ExamGradesProps> = ({ studentId, renderMode = 
 
     const fetchSubjectDetails = async (subjectId: number | string) => {
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/subjects/${subjectId}/`);
+            const res = await fetch(`https://djsms.onrender.com/api/subjects/${subjectId}/`);
             if (!res.ok) return undefined;
             return await res.json();
         } catch {
@@ -104,7 +104,7 @@ export const ExamGrades: React.FC<ExamGradesProps> = ({ studentId, renderMode = 
         const examIds = Array.from(new Set(results.map(r => r.exam)));
         const examDetailsArr = await Promise.all(
             examIds.map(id =>
-                fetch(`http://127.0.0.1:8000/api/exams/${id}/`).then(res => res.json())
+                fetch(`https://djsms.onrender.com/api/exams/${id}/`).then(res => res.json())
             )
         );
         const examDetailsMap: Record<number, Exam> = {};
@@ -139,7 +139,7 @@ export const ExamGrades: React.FC<ExamGradesProps> = ({ studentId, renderMode = 
     };
 
     const fetchAndSetExamResults = async (studentId: string) => {
-        const res = await fetch(`http://127.0.0.1:8000/api/exam-results/?student=${studentId}`);
+        const res = await fetch(`https://djsms.onrender.com/api/exam-results/?student=${studentId}`);
         const data = await res.json();
         const rawResults = Array.isArray(data) ? data : data.results ?? [];
         const enriched = await enrichResultsWithExamAndSubjectDetails(rawResults);
@@ -150,7 +150,7 @@ export const ExamGrades: React.FC<ExamGradesProps> = ({ studentId, renderMode = 
         if (!studentId) return;
         setLoading(true);
         setError(null);
-        fetch(`http://127.0.0.1:8000/api/students/${studentId}/`)
+        fetch(`https://djsms.onrender.com/api/students/${studentId}/`)
             .then(res => {
                 if (!res.ok) throw new Error("Failed to fetch student");
                 return res.json();
@@ -168,7 +168,7 @@ export const ExamGrades: React.FC<ExamGradesProps> = ({ studentId, renderMode = 
 
     useEffect(() => {
         if (!isAddModalOpen) return;
-        fetch("http://127.0.0.1:8000/api/exams/")
+        fetch("https://djsms.onrender.com/api/exams/")
             .then(res => res.json())
             .then(async data => {
                 let examList = Array.isArray(data) ? data : data.results ?? [];
@@ -190,7 +190,7 @@ export const ExamGrades: React.FC<ExamGradesProps> = ({ studentId, renderMode = 
         if (!student || !addForm.exam || !addForm.score) return;
         try {
             setLoading(true);
-            const res = await fetch("http://127.0.0.1:8000/api/exam-results/", {
+            const res = await fetch("https://djsms.onrender.com/api/exam-results/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -229,7 +229,7 @@ export const ExamGrades: React.FC<ExamGradesProps> = ({ studentId, renderMode = 
         if (!editForm.id || editForm.score === "") return;
         try {
             setLoading(true);
-            const res = await fetch(`http://127.0.0.1:8000/api/exam-results/${editForm.id}/`, {
+            const res = await fetch(`https://djsms.onrender.com/api/exam-results/${editForm.id}/`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ score: editForm.score }),

@@ -13,12 +13,12 @@ export const Navbar = ({children}: { children: React.ReactNode }) => {
 
     const links = [
         {name: "Dashboard", href: "/dashboard"},
-        {name: "Students View", href: "/StudentsView"},
-        {name: "Courses View", href: "/CoursesView"},
-        {name: "Subjects View", href: "/SubjectsView"},
-        {name: "Quizzes View", href: "/QuizzesView"},
-        {name: "Activities View", href: "/ActivitiesView"},
-        {name: "Exams View", href: "/ExamsView"},
+        {name: "Students", href: "/StudentsView"},
+        {name: "Courses", href: "/CoursesView"},
+        {name: "Subjects", href: "/SubjectsView"},
+        {name: "Quizzes", href: "/QuizzesView"},
+        {name: "Activities", href: "/ActivitiesView"},
+        {name: "Exams", href: "/ExamsView"},
     ];
 
     const toggleSidebar = () => setIsOpen(!isOpen);

@@ -47,8 +47,8 @@ export const ActivitiesView = () => {
     const fetchData = async () => {
         setLoading(true);
         const [activityRes, subjectRes] = await Promise.all([
-            fetch("http://127.0.0.1:8000/api/activities/"),
-            fetch("http://127.0.0.1:8000/api/subjects/"),
+            fetch("https://djsms.onrender.com/api/activities/"),
+            fetch("https://djsms.onrender.com/api/subjects/"),
         ]);
         const activitiesData = await activityRes.json();
         const subjectsData = await subjectRes.json();
@@ -76,7 +76,7 @@ export const ActivitiesView = () => {
         if (form.total_marks !== "") payload.total_marks = Number(form.total_marks);
         if (form.description) payload.description = form.description;
 
-        const res = await fetch("http://127.0.0.1:8000/api/activities/", {
+        const res = await fetch("https://djsms.onrender.com/api/activities/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -115,7 +115,7 @@ export const ActivitiesView = () => {
         if (editForm.total_marks !== "") payload.total_marks = Number(editForm.total_marks);
         if (editForm.description) payload.description = editForm.description;
 
-        const res = await fetch(`http://127.0.0.1:8000/api/activities/${activityToEdit.id}/`, {
+        const res = await fetch(`https://djsms.onrender.com/api/activities/${activityToEdit.id}/`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -141,7 +141,7 @@ export const ActivitiesView = () => {
 
     const handleConfirmDelete = async () => {
         if (!activityToDelete) return;
-        await fetch(`http://127.0.0.1:8000/api/activities/${activityToDelete.id}/`, { method: "DELETE" });
+        await fetch(`https://djsms.onrender.com/api/activities/${activityToDelete.id}/`, { method: "DELETE" });
         setActivityToDelete(null);
         await fetchData();
     };

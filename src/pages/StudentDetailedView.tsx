@@ -85,7 +85,7 @@ export const StudentDetailedView: React.FC = () => {
     const fetchStudent = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/students/${id}/`);
+            const res = await fetch(`https://djsms.onrender.com/api/students/${id}/`);
             if (!res.ok) {
                 setStudent(null);
                 setLoading(false);
@@ -94,13 +94,13 @@ export const StudentDetailedView: React.FC = () => {
             const data = await res.json();
 
             const [course, year_level, section, subjects] = await Promise.all([
-                data.course ? fetch(`http://127.0.0.1:8000/api/courses/${data.course}/`).then(r => r.json()) : null,
-                data.year_level ? fetch(`http://127.0.0.1:8000/api/yearlevels/${data.year_level}/`).then(r => r.json()) : null,
-                data.section ? fetch(`http://127.0.0.1:8000/api/sections/${data.section}/`).then(r => r.json()) : null,
+                data.course ? fetch(`https://djsms.onrender.com/api/courses/${data.course}/`).then(r => r.json()) : null,
+                data.year_level ? fetch(`https://djsms.onrender.com/api/yearlevels/${data.year_level}/`).then(r => r.json()) : null,
+                data.section ? fetch(`https://djsms.onrender.com/api/sections/${data.section}/`).then(r => r.json()) : null,
                 data.subject?.length
                     ? Promise.all(
                         data.subject.map((sid: string) =>
-                            fetch(`http://127.0.0.1:8000/api/subjects/${sid}/`).then(r => r.json())
+                            fetch(`https://djsms.onrender.com/api/subjects/${sid}/`).then(r => r.json())
                         )
                     )
                     : [],
@@ -138,7 +138,7 @@ export const StudentDetailedView: React.FC = () => {
                 if (student.profile_image.startsWith("http")) {
                     profileImagePreview = student.profile_image;
                 } else {
-                    profileImagePreview = `http://127.0.0.1:8000${student.profile_image}`;
+                    profileImagePreview = `https://djsms.onrender.com${student.profile_image}`;
                 }
             }
             setEditForm({
@@ -158,14 +158,14 @@ export const StudentDetailedView: React.FC = () => {
     }, [student]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/courses/")
+        fetch("https://djsms.onrender.com/api/courses/")
             .then(res => res.json())
             .then(data => setCourses(Array.isArray(data) ? data : data.results ?? []));
     }, []);
 
     useEffect(() => {
         if (isAddSubjectModalOpen) {
-            fetch("http://127.0.0.1:8000/api/subjects/")
+            fetch("https://djsms.onrender.com/api/subjects/")
                 .then(res => res.json())
                 .then(data => {
                     setAllSubjects(
@@ -228,7 +228,7 @@ export const StudentDetailedView: React.FC = () => {
                 });
                 headers["Content-Type"] = "application/json";
             }
-            const res = await fetch(`http://127.0.0.1:8000/api/students/${student.id}/`, {
+            const res = await fetch(`https://djsms.onrender.com/api/students/${student.id}/`, {
                 method: "PUT",
                 headers,
                 body,
@@ -249,7 +249,7 @@ export const StudentDetailedView: React.FC = () => {
 
     const handleConfirmDelete = () => {
         if (!student) return;
-        fetch(`http://127.0.0.1:8000/api/students/${student.id}/`, {method: "DELETE"}).then(() =>
+        fetch(`https://djsms.onrender.com/api/students/${student.id}/`, {method: "DELETE"}).then(() =>
             navigate("/StudentsView")
         );
     };
@@ -260,7 +260,7 @@ export const StudentDetailedView: React.FC = () => {
         if (!student) return;
         setAddSubjectLoading(true);
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/students/${student.id}/`, {
+            const response = await fetch(`https://djsms.onrender.com/api/students/${student.id}/`, {
                 method: "PATCH",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -390,7 +390,7 @@ export const StudentDetailedView: React.FC = () => {
                                         if (student.profile_image.startsWith("http")) {
                                             profileImageUrl = student.profile_image;
                                         } else {
-                                            profileImageUrl = `http://127.0.0.1:8000${student.profile_image}`;
+                                            profileImageUrl = `https://djsms.onrender.com${student.profile_image}`;
                                         }
                                     }
                                     return (

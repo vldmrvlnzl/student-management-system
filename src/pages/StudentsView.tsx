@@ -94,31 +94,31 @@ export const StudentsView = () => {
     }, []);
 
     const fetchStudents = async () => {
-        const res = await fetch("http://127.0.0.1:8000/api/students/");
+        const res = await fetch("https://djsms.onrender.com/api/students/");
         const data = await res.json();
         setStudents(Array.isArray(data) ? data : data.results || []);
     };
 
     const fetchCourses = async () => {
-        const res = await fetch("http://127.0.0.1:8000/api/courses/");
+        const res = await fetch("https://djsms.onrender.com/api/courses/");
         const data = await res.json();
         setCourses(Array.isArray(data) ? data : data.results || []);
     };
 
     const fetchSections = async () => {
-        const res = await fetch("http://127.0.0.1:8000/api/sections/");
+        const res = await fetch("https://djsms.onrender.com/api/sections/");
         const data = await res.json();
         setSections(Array.isArray(data) ? data : data.results || []);
     };
 
     const fetchYearLevels = async () => {
-        const res = await fetch("http://127.0.0.1:8000/api/yearlevels/");
+        const res = await fetch("https://djsms.onrender.com/api/yearlevels/");
         const data = await res.json();
         setYearLevels(Array.isArray(data) ? data : data.results || []);
     };
 
     const fetchSubjects = async () => {
-        const res = await fetch("http://127.0.0.1:8000/api/subjects/");
+        const res = await fetch("https://djsms.onrender.com/api/subjects/");
         const data = await res.json();
         setSubjects(Array.isArray(data) ? data : data.results || []);
     };
@@ -128,7 +128,7 @@ export const StudentsView = () => {
 
     const handleConfirmDelete = async () => {
         if (!studentToDelete) return;
-        await fetch(`http://127.0.0.1:8000/api/students/${studentToDelete.id}/`, {method: "DELETE"});
+        await fetch(`https://djsms.onrender.com/api/students/${studentToDelete.id}/`, {method: "DELETE"});
         await fetchStudents();
         setStudentToDelete(null);
     };
@@ -209,7 +209,7 @@ export const StudentsView = () => {
         }
 
         try {
-            const res = await fetch("http://127.0.0.1:8000/api/students/", {
+            const res = await fetch("https://djsms.onrender.com/api/students/", {
                 method: "POST",
                 body: data,
             });

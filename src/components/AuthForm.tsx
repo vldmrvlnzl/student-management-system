@@ -28,8 +28,8 @@ export const AuthForm = () => {
         e.preventDefault();
         try {
             const url = isLogin
-                ? "http://127.0.0.1:8000/api/accounts/login/"
-                : "http://127.0.0.1:8000/api/accounts/register/";
+                ? "https://djsms.onrender.com/api/accounts/login/"
+                : "https://djsms.onrender.com/api/accounts/register/";
 
             const payload = isLogin
                 ? { username: formData.username, password: formData.password }

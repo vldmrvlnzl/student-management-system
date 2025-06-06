@@ -44,8 +44,8 @@ export const QuizzesView = () => {
     const fetchData = async () => {
         setLoading(true);
         const [quizRes, subjectRes] = await Promise.all([
-            fetch("http://127.0.0.1:8000/api/quizzes/"),
-            fetch("http://127.0.0.1:8000/api/subjects/"),
+            fetch("https://djsms.onrender.com/api/quizzes/"),
+            fetch("https://djsms.onrender.com/api/subjects/"),
         ]);
         const quizzesData = await quizRes.json();
         const subjectsData = await subjectRes.json();
@@ -75,7 +75,7 @@ export const QuizzesView = () => {
         if (form.title) payload.title = form.title;
         if (form.total_marks !== "") payload.total_marks = Number(form.total_marks);
 
-        const res = await fetch("http://127.0.0.1:8000/api/quizzes/", {
+        const res = await fetch("https://djsms.onrender.com/api/quizzes/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -112,7 +112,7 @@ export const QuizzesView = () => {
         if (editForm.title) payload.title = editForm.title;
         if (editForm.total_marks !== "") payload.total_marks = Number(editForm.total_marks);
 
-        const res = await fetch(`http://127.0.0.1:8000/api/quizzes/${quizToEdit.id}/`, {
+        const res = await fetch(`https://djsms.onrender.com/api/quizzes/${quizToEdit.id}/`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -138,7 +138,7 @@ export const QuizzesView = () => {
 
     const handleConfirmDelete = async () => {
         if (!quizToDelete) return;
-        await fetch(`http://127.0.0.1:8000/api/quizzes/${quizToDelete.id}/`, { method: "DELETE" });
+        await fetch(`https://djsms.onrender.com/api/quizzes/${quizToDelete.id}/`, { method: "DELETE" });
         setQuizToDelete(null);
         await fetchData();
     };

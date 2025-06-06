@@ -92,7 +92,7 @@ export const ActivityGrades: React.FC<ActivityGradesProps> = ({ studentId, rende
 
     const fetchSubjectDetails = async (subjectId: number | string) => {
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/subjects/${subjectId}/`);
+            const res = await fetch(`https://djsms.onrender.com/api/subjects/${subjectId}/`);
             if (!res.ok) return undefined;
             return await res.json();
         } catch {
@@ -104,7 +104,7 @@ export const ActivityGrades: React.FC<ActivityGradesProps> = ({ studentId, rende
         const activityIds = Array.from(new Set(results.map(r => r.activity)));
         const activityDetailsArr = await Promise.all(
             activityIds.map(id =>
-                fetch(`http://127.0.0.1:8000/api/activities/${id}/`).then(res => res.json())
+                fetch(`https://djsms.onrender.com/api/activities/${id}/`).then(res => res.json())
             )
         );
         const activityDetailsMap: Record<number, Activity> = {};
@@ -139,7 +139,7 @@ export const ActivityGrades: React.FC<ActivityGradesProps> = ({ studentId, rende
     };
 
     const fetchAndSetActivityResults = async (studentId: string) => {
-        const res = await fetch(`http://127.0.0.1:8000/api/activity-results/?student=${studentId}`);
+        const res = await fetch(`https://djsms.onrender.com/api/activity-results/?student=${studentId}`);
         const data = await res.json();
         const rawResults = Array.isArray(data) ? data : data.results ?? [];
         const enriched = await enrichResultsWithActivityAndSubjectDetails(rawResults);
@@ -150,7 +150,7 @@ export const ActivityGrades: React.FC<ActivityGradesProps> = ({ studentId, rende
         if (!studentId) return;
         setLoading(true);
         setError(null);
-        fetch(`http://127.0.0.1:8000/api/students/${studentId}/`)
+        fetch(`https://djsms.onrender.com/api/students/${studentId}/`)
             .then(res => {
                 if (!res.ok) throw new Error("Failed to fetch student");
                 return res.json();
@@ -168,7 +168,7 @@ export const ActivityGrades: React.FC<ActivityGradesProps> = ({ studentId, rende
 
     useEffect(() => {
         if (!isAddModalOpen) return;
-        fetch("http://127.0.0.1:8000/api/activities/")
+        fetch("https://djsms.onrender.com/api/activities/")
             .then(res => res.json())
             .then(async data => {
                 let activityList = Array.isArray(data) ? data : data.results ?? [];
@@ -190,7 +190,7 @@ export const ActivityGrades: React.FC<ActivityGradesProps> = ({ studentId, rende
         if (!student || !addForm.activity || !addForm.score) return;
         try {
             setLoading(true);
-            const res = await fetch("http://127.0.0.1:8000/api/activity-results/", {
+            const res = await fetch("https://djsms.onrender.com/api/activity-results/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -229,7 +229,7 @@ export const ActivityGrades: React.FC<ActivityGradesProps> = ({ studentId, rende
         if (!editForm.id || editForm.score === "") return;
         try {
             setLoading(true);
-            const res = await fetch(`http://127.0.0.1:8000/api/activity-results/${editForm.id}/`, {
+            const res = await fetch(`https://djsms.onrender.com/api/activity-results/${editForm.id}/`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ score: editForm.score }),

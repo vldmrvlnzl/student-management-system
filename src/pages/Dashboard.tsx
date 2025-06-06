@@ -49,12 +49,12 @@ export const Dashboard = () => {
                     activitiesRes,
                     examsRes,
                 ] = await Promise.all([
-                    fetch("http://127.0.0.1:8000/api/students/"),
-                    fetch("http://127.0.0.1:8000/api/courses/"),
-                    fetch("http://127.0.0.1:8000/api/subjects/"),
-                    fetch("http://127.0.0.1:8000/api/quizzes/"),
-                    fetch("http://127.0.0.1:8000/api/activities/"),
-                    fetch("http://127.0.0.1:8000/api/exams/"),
+                    fetch("https://djsms.onrender.com/api/students/"),
+                    fetch("https://djsms.onrender.com/api/courses/"),
+                    fetch("https://djsms.onrender.com/api/subjects/"),
+                    fetch("https://djsms.onrender.com/api/quizzes/"),
+                    fetch("https://djsms.onrender.com/api/activities/"),
+                    fetch("https://djsms.onrender.com/api/exams/"),
                 ]);
                 const [students, courses, subjects, quizzes, activities, exams] = await Promise.all([
                     studentsRes.json(),
