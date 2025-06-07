@@ -24,7 +24,7 @@ export const Navbar = ({children}: { children: React.ReactNode }) => {
     const toggleSidebar = () => setIsOpen(!isOpen);
     const confirmLogout = () => {
         localStorage.removeItem("token");
-        navigate("/auth");
+        navigate("/");
     };
 
     return (
